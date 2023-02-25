@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane fx:id="pane" prefHeight="639.0" prefWidth="1050.0" style="-fx-background-color: white;"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="lk.groceryShop.controller.MainFormController">
+
+</AnchorPane>
