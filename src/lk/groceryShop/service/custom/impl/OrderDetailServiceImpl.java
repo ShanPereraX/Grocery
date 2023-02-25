@@ -1,9 +1,9 @@
-package lk.groceryShop.dao.custom.impl;
+package lk.groceryShop.service.custom.impl;
 
-import lk.groceryShop.dao.custom.OrderDetailDao;
 import lk.groceryShop.entity.OrderDetail;
+import lk.groceryShop.service.custom.OrderDetailService;
 
-public class OrderDetailDaoImpl implements OrderDetailDao {
+public class OrderDetailServiceImpl implements OrderDetailService {
     @Override
     public boolean save(OrderDetail entity) {
         return false;
