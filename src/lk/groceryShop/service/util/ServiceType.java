@@ -4,6 +4,5 @@ public enum ServiceType {
     CUSTOMER,
     ITEM,
     ORDER,
-    ORDER_DETAIL,
-    QUARY
+    ORDER_DETAIL
 }

@@ -2,12 +2,15 @@ package lk.groceryShop.dao;
 
 import lk.groceryShop.dao.custom.impl.*;
 import lk.groceryShop.dao.util.DaoTypes;
+import lk.groceryShop.util.FactoryConfiguration;
+import org.hibernate.Session;
 
 public class DaoFactory {
     private static DaoFactory daoFactory;
+    private final Session session;
 
     private DaoFactory() {
-
+        session = FactoryConfiguration.getInstance().getSession();
     }
 
     public static DaoFactory getInstance() {

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane fx:id="mainPanel" prefHeight="639.0" prefWidth="1050.0" style="-fx-background-color: #222831;"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="lk.groceryShop.controller.MainFormController">
+    <children>
+        <AnchorPane fx:id="sidePanel" layoutX="-48.0" layoutY="15.0" prefHeight="607.0" prefWidth="200.0"
+                    style="-fx-background-color: #00ADB5; -fx-background-radius: 30;">
+            <children>
+                <JFXButton fx:id="btnCustomer" layoutX="23.0" layoutY="137.0" onAction="#btnCustomerOnAction"
+                           prefHeight="56.0" prefWidth="154.0" style="-fx-background-color: F7F7F7;" text="Customer">
+                    <font>
+                        <Font name="System Bold" size="13.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <effect>
+                        <SepiaTone/>
+                    </effect>
+                </JFXButton>
+                <JFXButton fx:id="btnPlaceOrder" layoutX="21.0" layoutY="227.0" onAction="#btnPlaceOrderOnAction"
+                           prefHeight="56.0" prefWidth="154.0" style="-fx-background-color: F7F7F7;" text="Place Order">
+                    <font>
+                        <Font name="System Bold" size="13.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </JFXButton>
+                <JFXButton fx:id="btnItem" layoutX="21.0" layoutY="308.0" onAction="#btnItemOnAction" prefHeight="56.0"
+                           prefWidth="154.0" style="-fx-background-color: F7F7F7;" text="Item">
+                    <font>
+                        <Font name="System Bold" size="13.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </JFXButton>
+                <JFXButton fx:id="btnHome" layoutX="70.0" layoutY="24.0" onAction="#btnHomeOnAction" prefHeight="56.0"
+                           prefWidth="69.0" style="-fx-background-color: F7F7F7; -fx-background-radius: 50;"
+                           text="Home">
+                    <font>
+                        <Font name="System Bold" size="13.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </JFXButton>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="subPanel" layoutX="202.0" layoutY="73.0" prefHeight="530.0" prefWidth="820.0"
+                    style="-fx-background-radius: 30; -fx-background-color: F7F7F7;"/>
+        <Label layoutX="196.0" layoutY="14.0" prefHeight="16.0" prefWidth="321.0" text="Grocery Store"
+               textFill="#b2b2b2">
+            <font>
+                <Font name="System Bold" size="41.0"/>
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
