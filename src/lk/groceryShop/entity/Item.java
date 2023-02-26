@@ -1,16 +1,16 @@
 package lk.groceryShop.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name = "Item")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Getter
+@Setter
 public class Item implements SuperEntity {
     @Id
     private String itemId;
@@ -18,4 +18,8 @@ public class Item implements SuperEntity {
     private String description;
     private double unitPrice;
     private int qtyOnHand;
+
+    public Item(String itemId) {
+        this.itemId = itemId;
+    }
 }

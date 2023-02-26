@@ -13,7 +13,7 @@ public class ServiceFactory {
     private ServiceFactory() {
     }
 
-    private static ServiceFactory getInstance() {
+    public static ServiceFactory getInstance() {
         return serviceFactory == null ? serviceFactory = new ServiceFactory() : serviceFactory;
     }
     public <T extends SuperService> T getService(ServiceType type){
@@ -26,7 +26,8 @@ public class ServiceFactory {
                 return (T) new OrderServiceImpl();
             case ORDER_DETAIL:
                 return (T) new OrderDetailServiceImpl();
+            default: throw new RuntimeException("Not Implemented");
         }
-        return null;
+
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="530.0" prefWidth="820.0" style="-fx-background-radius: 30;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.groceryShop.controller.ManageItemFormController">
+    <children>
+        <Label layoutX="99.0" layoutY="14.0" opacity="0.86" prefHeight="62.0" prefWidth="370.0" text="Manage Item" textAlignment="CENTER">
+            <font>
+                <Font name="Jamrul" size="35.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tblItem" layoutX="31.0" layoutY="76.0" prefHeight="218.0" prefWidth="740.0">
+            <columns>
+                <TableColumn fx:id="colCode" prefWidth="75.0" text="Code" />
+                <TableColumn fx:id="colDescription" prefWidth="436.0" text="Description" />
+                <TableColumn fx:id="colQtyOnHand" prefWidth="104.0" text="Qty On Hand" />
+                <TableColumn fx:id="colUnitPrice" prefWidth="124.0" text="Unit Price" />
+            </columns>
+        </TableView>
+        <TextField layoutX="600.0" layoutY="45.0" promptText="Search by ID" />
+        <JFXButton fx:id="btnAdd" layoutX="550.0" layoutY="458.0" onAction="#btnAddOnAction" prefHeight="44.0" prefWidth="109.0" style="-fx-background-color: #00ADB5;" text="Add" />
+        <JFXButton fx:id="btnDelete" layoutX="672.0" layoutY="458.0" onAction="#btnDeleteOnAction" prefHeight="44.0" prefWidth="109.0" style="-fx-background-color: #C74B50;" text="Delete" />
+        <TextField fx:id="txtDescription" layoutX="149.0" layoutY="365.0" />
+        <TextField fx:id="txtQtyOnHand" layoutX="558.0" layoutY="320.0" />
+        <TextField fx:id="txtUnitPrice" layoutX="558.0" layoutY="365.0" />
+        <Label layoutX="52.0" layoutY="370.0" text="Description" />
+        <Label layoutX="52.0" layoutY="325.0" text="ID" />
+        <Label fx:id="txtId" layoutX="129.0" layoutY="325.0" prefHeight="16.0" prefWidth="67.0" text="Exmple" />
+        <Label layoutX="414.0" layoutY="325.0" prefHeight="16.0" prefWidth="88.0" text="Qty On Hand" />
+        <Label layoutX="414.0" layoutY="370.0" prefHeight="16.0" prefWidth="88.0" text="Unit Price" />
+        <JFXButton fx:id="btnUpdate" layoutX="424.0" layoutY="458.0" onAction="#btnUpdateOnAction" prefHeight="44.0" prefWidth="109.0" style="-fx-background-color: #A5C9CA;" text="Update" />
+        <JFXButton fx:id="btnUpdate1" layoutX="19.0" layoutY="28.0" onAction="#btnUpdateOnAction" prefHeight="34.0" prefWidth="67.0" style="-fx-background-color: #A5C9CA;" text="Back" />
+    </children>
+</AnchorPane>

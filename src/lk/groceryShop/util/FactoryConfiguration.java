@@ -2,8 +2,7 @@ package lk.groceryShop.util;
 
 import lk.groceryShop.entity.Customer;
 import lk.groceryShop.entity.Item;
-import lk.groceryShop.entity.Order;
-import lk.groceryShop.entity.OrderDetail;
+import lk.groceryShop.entity.Orders;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -17,8 +16,8 @@ public class FactoryConfiguration {
 
         configuration.addAnnotatedClass(Customer.class);
         configuration.addAnnotatedClass(Item.class);
-        configuration.addAnnotatedClass(Order.class);
-        configuration.addAnnotatedClass(OrderDetail.class);
+        configuration.addAnnotatedClass(Orders.class);
+        // configuration.addAnnotatedClass(OrderDetail.class);
 
         sessionFactory = configuration.buildSessionFactory();
     }

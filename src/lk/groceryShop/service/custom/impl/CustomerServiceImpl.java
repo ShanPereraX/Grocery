@@ -1,26 +1,40 @@
 package lk.groceryShop.service.custom.impl;
 
+import lk.groceryShop.dao.DaoFactory;
+import lk.groceryShop.dao.custom.CustomerDao;
+import lk.groceryShop.dao.util.DaoTypes;
+import lk.groceryShop.dto.CustomerDto;
 import lk.groceryShop.entity.Customer;
+import lk.groceryShop.entity.Item;
 import lk.groceryShop.service.custom.CustomerService;
+import lk.groceryShop.service.util.Converter;
 
 public class CustomerServiceImpl implements CustomerService {
-    @Override
-    public boolean save(Customer entity) {
-        return false;
+    private final CustomerDao customerDao;
+Converter converter;
+    public CustomerServiceImpl() {
+        converter = Converter.getInstance();
+        customerDao = DaoFactory.getInstance().getDao(DaoTypes.CUSTOMER);
     }
 
     @Override
-    public Customer view(String id) {
-        return null;
+    public boolean save(CustomerDto dto) {
+        return customerDao.save(converter.toCustomerEntity(dto));
     }
 
     @Override
-    public boolean delete(Customer entity) {
-        return false;
+    public CustomerDto view(String id) {
+        Customer entity = customerDao.view(id);
+        return (entity != null) ? converter.toCustomerDto(entity) : null;
     }
 
     @Override
-    public boolean update(Customer entity) {
-        return false;
+    public boolean delete(String id) {
+        return customerDao.delete(id);
+    }
+
+    @Override
+    public boolean update(CustomerDto dto) {
+        return customerDao.update(converter.toCustomerEntity(dto));
     }
 }

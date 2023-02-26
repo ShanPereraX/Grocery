@@ -1,19 +1,19 @@
 package lk.groceryShop.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Date;
 
-@Entity
+@Entity(name = "Orders")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Order implements SuperEntity{
+@Getter
+@Setter
+public class Orders implements SuperEntity{
     @Id private String orderId;
     private Date date;
-    private String customerId;
+    //private String customerId;
 }

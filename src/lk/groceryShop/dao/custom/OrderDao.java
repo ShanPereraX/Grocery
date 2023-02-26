@@ -1,7 +1,7 @@
 package lk.groceryShop.dao.custom;
 
 import lk.groceryShop.dao.CrudDao;
-import lk.groceryShop.entity.Order;
+import lk.groceryShop.entity.Orders;
 
-public interface OrderDao extends CrudDao<Order,String> {
+public interface OrderDao extends CrudDao<Orders,String> {
 }

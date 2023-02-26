@@ -41,18 +41,18 @@ public class MainFormController implements Initializable {
     }
 
     @FXML
-    void btnHomeOnAction(ActionEvent event) {
-
+    void btnHomeOnAction(ActionEvent event) throws IOException {
+        Navigation.navigate(mainPanel, NavigationType.HOME);
     }
 
     @FXML
-    void btnItemOnAction(ActionEvent event) {
-
+    void btnItemOnAction(ActionEvent event) throws IOException {
+        Navigation.navigate(subPanel, NavigationType.ITEM);
     }
 
     @FXML
-    void btnPlaceOrderOnAction(ActionEvent event) {
-
+    void btnPlaceOrderOnAction(ActionEvent event) throws IOException {
+        Navigation.navigate(subPanel, NavigationType.ORDER);
     }
 
     /**

@@ -2,8 +2,15 @@ package lk.groceryShop.dao.custom.impl;
 
 import lk.groceryShop.dao.custom.OrderDetailDao;
 import lk.groceryShop.entity.OrderDetail;
+import org.hibernate.Session;
 
 public class OrderDetailDaoImpl implements OrderDetailDao {
+    Session session;
+
+    public OrderDetailDaoImpl(Session session) {
+        this.session = session;
+    }
+
     @Override
     public boolean save(OrderDetail entity) {
         return false;
@@ -15,7 +22,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
     }
 
     @Override
-    public boolean delete(OrderDetail entity) {
+    public boolean delete(String entity) {
         return false;
     }
 

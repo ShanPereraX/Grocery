@@ -20,15 +20,15 @@ public class DaoFactory {
     public <T extends SuperDao> T getDao(DaoTypes types) {
         switch (types) {
             case ITEM:
-                return (T) new ItemDaoImpl();
+                return (T) new ItemDaoImpl(session);
             case CUSTOMER:
-                return (T) new CustomerDaoImpl();
+                return (T) new CustomerDaoImpl(session);
             case ORDER:
-                return (T) new OrderDaoImpl();
+                return (T) new OrderDaoImpl(session);
             case ORDER_DETAIL:
-                return (T) new OrderDetailDaoImpl();
+                return (T) new OrderDetailDaoImpl(session);
             case QUARY:
-                return (T) new QuaryDaoImpl();
+                return (T) new QuaryDaoImpl(session);
         }
         return null;
     }

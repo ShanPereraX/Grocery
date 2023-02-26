@@ -1,12 +1,13 @@
 package lk.groceryShop.service;
 
+import lk.groceryShop.dto.SuperDto;
 import lk.groceryShop.entity.SuperEntity;
 
 import java.io.Serializable;
 
-public interface SuperService<T extends SuperEntity, TM extends Serializable> {
-    boolean save(T entity);
+public interface SuperService<T extends SuperDto, TM extends Serializable> {
+    boolean save(T dto);
     T view(TM id);
-    boolean delete(T entity);
-    boolean update(T entity);
+    boolean delete(TM id);
+    boolean update(T dto);
 }
