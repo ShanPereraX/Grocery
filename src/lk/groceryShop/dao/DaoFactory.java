@@ -7,10 +7,7 @@ import org.hibernate.Session;
 
 public class DaoFactory {
     private static DaoFactory daoFactory;
-    private final Session session;
-
     private DaoFactory() {
-        session = FactoryConfiguration.getInstance().getSession();
     }
 
     public static DaoFactory getInstance() {
@@ -20,15 +17,13 @@ public class DaoFactory {
     public <T extends SuperDao> T getDao(DaoTypes types) {
         switch (types) {
             case ITEM:
-                return (T) new ItemDaoImpl(session);
+                return (T) new ItemDaoImpl();
             case CUSTOMER:
-                return (T) new CustomerDaoImpl(session);
+                return (T) new CustomerDaoImpl();
             case ORDER:
-                return (T) new OrderDaoImpl(session);
-            case ORDER_DETAIL:
-                return (T) new OrderDetailDaoImpl(session);
+                return (T) new OrderDaoImpl();
             case QUARY:
-                return (T) new QuaryDaoImpl(session);
+                return (T) new QuaryDaoImpl();
         }
         return null;
     }

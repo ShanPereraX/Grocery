@@ -1,6 +1,8 @@
 package lk.groceryShop.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.groceryShop.dto.CustomerDto;
 import lk.groceryShop.service.ServiceFactory;
@@ -18,6 +21,7 @@ import lk.groceryShop.service.util.ServiceType;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -65,7 +69,8 @@ public class ManageCustomerFormController implements Initializable {
                     txtAddress.getText(),
                     Date.valueOf(LocalDate.now()),
                     Double.parseDouble(txtSalary.getText())));
-            new Alert(Alert.AlertType.INFORMATION, save ? "Added" : "Error").showAndWait();
+            new Alert(Alert.AlertType.INFORMATION, save ? "Added" : "Error").show();
+            refreshTable();
             clearAll();
         }else new Alert(Alert.AlertType.ERROR,"Error: Invalid Data Entry!").show();
     }
@@ -95,12 +100,23 @@ public class ManageCustomerFormController implements Initializable {
     void btnDeleteOnAction(ActionEvent event) {
         if(tblCustomers.getSelectionModel().getSelectedItem() != null){
             customerService.delete(tblCustomers.getSelectionModel().getSelectedItem().getId());
-            new Alert(Alert.AlertType.INFORMATION,"Item successfully Deleted").showAndWait();
+            new Alert(Alert.AlertType.INFORMATION,"Customer successfully Deleted").show();
             refreshTable();
+            clearAll();
         }
     }
 
-    private void refreshTable() {
+    private void refreshTable(){
+      try{
+          List<CustomerDto> customerDtos = customerService.loadCustomers();
+          ObservableList<CustomerDto> list = FXCollections.observableArrayList();
+          list.addAll(customerDtos);
+          tblCustomers.setItems(list);
+          btnDelete.setDisable(true);
+          btnUpdate.setDisable(true);
+      }catch (RuntimeException e){
+          new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+      }
     }
 
     @FXML
@@ -121,9 +137,50 @@ public class ManageCustomerFormController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         customerService = ServiceFactory.getInstance().getService(ServiceType.CUSTOMER);
 
+        btnDelete.setDisable(true);
+        btnUpdate.setDisable(true);
+
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        setCustomerId();
+    }
+
+    private void setCustomerId() {
+          refreshTable();
+    }
+
+    public void tblCustomersOnMouseClicked(MouseEvent mouseEvent) {
+        CustomerDto selectedCustomer = tblCustomers.getSelectionModel().getSelectedItem();
+        if(selectedCustomer!=null){
+
+            btnDelete.setDisable(false);
+            btnUpdate.setDisable(false);
+
+            txtId.setText(selectedCustomer.getId());
+            txtName.setText(selectedCustomer.getName());
+            txtAddress.setText(selectedCustomer.getAddress());
+            txtSalary.setText(String.valueOf(selectedCustomer.getSalary()));
+
+        }
+    }
+
+    public void searchIdOnAction(ActionEvent actionEvent) {
+    }
+
+    public void txtSalaryOnMouseClicked(MouseEvent mouseEvent) {
+
+    }
+
+    public void txtAddressOnMouseClicked(MouseEvent mouseEvent) {
+    }
+
+    public void txtNameOnMouseClicked(MouseEvent mouseEvent) {
+
+    }
+
+    public void txtIdOnMouseClicked(MouseEvent mouseEvent) {
+
     }
 }

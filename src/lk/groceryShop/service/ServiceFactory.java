@@ -1,9 +1,7 @@
 package lk.groceryShop.service;
 
-import lk.groceryShop.dao.custom.impl.*;
 import lk.groceryShop.service.custom.impl.CustomerServiceImpl;
 import lk.groceryShop.service.custom.impl.ItemServiceImpl;
-import lk.groceryShop.service.custom.impl.OrderDetailServiceImpl;
 import lk.groceryShop.service.custom.impl.OrderServiceImpl;
 import lk.groceryShop.service.util.ServiceType;
 
@@ -24,8 +22,6 @@ public class ServiceFactory {
                 return (T) new CustomerServiceImpl();
             case ORDER:
                 return (T) new OrderServiceImpl();
-            case ORDER_DETAIL:
-                return (T) new OrderDetailServiceImpl();
             default: throw new RuntimeException("Not Implemented");
         }
 

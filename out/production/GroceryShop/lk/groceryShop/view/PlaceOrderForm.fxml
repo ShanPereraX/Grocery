@@ -1,66 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.control.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="530.0" prefWidth="820.0" style="-fx-background-radius: 20;"
-            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="lk.groceryShop.controller.PlaceOrderFormController">
+
+<AnchorPane prefHeight="530.0" prefWidth="820.0" style="-fx-background-radius: 20;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.groceryShop.controller.PlaceOrderFormController">
     <children>
         <Label layoutX="10.0" layoutY="8.0" text="Place Order">
             <font>
-                <Font size="29.0"/>
+                <Font size="29.0" />
             </font>
         </Label>
-        <Label layoutX="36.0" layoutY="52.0" text="Customer ID"/>
-        <ComboBox fx:id="cmbCustomerID" layoutX="145.0" layoutY="47.0" prefWidth="150.0" promptText="Customer List"/>
-        <TableView fx:id="tblCart" layoutX="25.0" layoutY="227.0" onSort="#tblCartOnAction" prefHeight="258.0"
-                   prefWidth="768.0">
+        <Label layoutX="36.0" layoutY="52.0" text="Customer ID" />
+        <ComboBox fx:id="cmbCustomerID" layoutX="145.0" layoutY="47.0" onAction="#cmbCustomerListOnAction" prefWidth="150.0" promptText="Customer List" />
+        <TableView fx:id="tblCart" layoutX="25.0" layoutY="227.0" onSort="#tblCartOnAction" prefHeight="258.0" prefWidth="768.0">
             <columns>
-                <TableColumn fx:id="colId" prefWidth="75.0" text="Item ID"/>
-                <TableColumn fx:id="colDescription" prefWidth="399.0" text="Description"/>
-                <TableColumn fx:id="colQty" prefWidth="117.0" text="Qty"/>
-                <TableColumn fx:id="colPrice" prefWidth="176.0" text="Price"/>
+                <TableColumn id="colItemId" fx:id="colId" prefWidth="75.0" text="Item ID" />
+                <TableColumn id="colDescription" fx:id="colDescription" prefWidth="261.0" text="Description" />
+                <TableColumn id="colQty" fx:id="colQty" prefWidth="85.0" text="Qty" />
+                <TableColumn id="colPrice" fx:id="colPrice" prefWidth="204.0" text="Unit Price" />
+            <TableColumn id="colPrice" fx:id="colTotalPrice" prefWidth="142.0" text="Price" />
             </columns>
         </TableView>
-        <JFXButton fx:id="btnClear" layoutX="722.0" layoutY="488.0" onAction="#btnClearOnAction" prefHeight="35.0"
-                   prefWidth="69.0" style="-fx-background-color: FF4C29;" text="Clear"/>
-        <JFXButton fx:id="btnPlaceOrder" layoutX="594.0" layoutY="488.0" onAction="#btnPlaceOrderOnAction"
-                   prefHeight="35.0" prefWidth="114.0" style="-fx-background-color: #21E6C1;" text="Place Order"/>
-        <Separator layoutX="9.0" layoutY="216.0" prefHeight="3.0" prefWidth="800.0"/>
-        <Label layoutX="36.0" layoutY="88.0" text="Item"/>
-        <ComboBox fx:id="cmbItemId" layoutX="145.0" layoutY="82.0" prefWidth="150.0" promptText="Item List"/>
-        <Label layoutX="632.0" layoutY="14.0" prefHeight="16.0" prefWidth="162.0" text="Date"/>
-        <JFXButton fx:id="btnAddToCart" layoutX="701.0" layoutY="135.0" onAction="#btnAddToCartOnAction"
-                   prefHeight="35.0" prefWidth="93.0" style="-fx-background-color: #00ADB5;" text="Add to Cart"/>
-        <Label layoutX="32.0" layoutY="123.0" text="Description"/>
-        <Label layoutX="204.0" layoutY="123.0" text="Unit Price"/>
-        <Label layoutX="372.0" layoutY="124.0" text="Qty On Hand"/>
-        <TextField fx:id="txtQty" layoutX="526.0" layoutY="136.0" prefHeight="35.0" prefWidth="170.0"
-                   promptText="Enter Qty "/>
-        <TextField fx:id="txtDescription" editable="false" layoutX="32.0" layoutY="144.0" prefHeight="26.0"
-                   prefWidth="150.0" promptText="Description"/>
-        <TextField fx:id="txtUnitPrice" editable="false" layoutX="204.0" layoutY="144.0" prefHeight="26.0"
-                   prefWidth="126.0" promptText="Rs."/>
-        <TextField fx:id="txtQtyOnHand" editable="false" layoutX="370.0" layoutY="144.0" prefHeight="26.0"
-                   prefWidth="126.0" promptText="qty"/>
-        <Label layoutX="524.0" layoutY="63.0" text="Name"/>
-        <TextField fx:id="txtCustomerName" editable="false" layoutX="580.0" layoutY="58.0" prefHeight="26.0"
-                   prefWidth="211.0" promptText="Lakshan Chamoditha Perera"/>
-        <JFXButton layoutX="303.0" layoutY="47.0" prefHeight="16.0" prefWidth="56.0"
-                   style="-fx-background-color: #21E6C1;" text="New"/>
+        <JFXButton fx:id="btnClear" layoutX="722.0" layoutY="488.0" onAction="#btnClearOnAction" prefHeight="35.0" prefWidth="69.0" style="-fx-background-color: FF4C29;" text="Clear" />
+        <JFXButton fx:id="btnPlaceOrder" layoutX="594.0" layoutY="488.0" onAction="#btnPlaceOrderOnAction" prefHeight="35.0" prefWidth="114.0" style="-fx-background-color: #21E6C1;" text="Place Order" />
+        <Separator layoutX="9.0" layoutY="216.0" prefHeight="3.0" prefWidth="800.0" />
+        <Label layoutX="36.0" layoutY="88.0" text="Item" />
+        <ComboBox fx:id="cmbItemId" layoutX="145.0" layoutY="82.0" onAction="#cmbItemIdOnAction" prefWidth="150.0" promptText="Item List" />
+        <Label fx:id="txtDate" layoutX="664.0" layoutY="18.0" prefHeight="16.0" prefWidth="126.0" text="Date" />
+        <JFXButton fx:id="btnAddToCart" layoutX="701.0" layoutY="135.0" onAction="#btnAddToCartOnAction" prefHeight="35.0" prefWidth="93.0" style="-fx-background-color: #00ADB5;" text="Add to Cart" />
+        <Label layoutX="32.0" layoutY="123.0" text="Description" />
+        <Label layoutX="204.0" layoutY="123.0" text="Unit Price" />
+        <Label layoutX="372.0" layoutY="124.0" text="Qty On Hand" />
+        <TextField fx:id="txtQty" layoutX="526.0" layoutY="136.0" prefHeight="35.0" prefWidth="170.0" promptText="Enter Qty " />
+        <TextField fx:id="txtDescription" editable="false" layoutX="32.0" layoutY="144.0" prefHeight="26.0" prefWidth="150.0" promptText="Description" />
+        <TextField fx:id="txtUnitPrice" editable="false" layoutX="204.0" layoutY="144.0" prefHeight="26.0" prefWidth="126.0" promptText="Rs." />
+        <TextField fx:id="txtQtyOnHand" editable="false" layoutX="370.0" layoutY="144.0" prefHeight="26.0" prefWidth="126.0" promptText="Qty" />
+        <Label layoutX="524.0" layoutY="63.0" text="Name" />
+        <TextField fx:id="txtCustomerName" editable="false" layoutX="580.0" layoutY="58.0" prefHeight="26.0" prefWidth="211.0" promptText="Lakshan Chamoditha Perera" />
+        <JFXButton layoutX="303.0" layoutY="47.0" prefHeight="16.0" prefWidth="56.0" style="-fx-background-color: #21E6C1;" text="New" />
         <Label layoutX="31.0" layoutY="498.0" prefHeight="21.0" prefWidth="126.0" text="Total : Rs.">
             <font>
-                <Font name="System Bold" size="18.0"/>
+                <Font name="System Bold" size="18.0" />
             </font>
         </Label>
         <Label fx:id="lblTotal" layoutX="153.0" layoutY="498.0" prefHeight="21.0" prefWidth="126.0" text="0.00">
             <font>
-                <Font name="System Bold" size="18.0"/>
+                <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-        <JFXButton fx:id="btnRemoveFromCart" layoutX="642.0" layoutY="185.0" onAction="#btnRemoveFromCartOnAction"
-                   prefHeight="21.0" prefWidth="150.0" style="-fx-background-color: ECB365;" text="Remove From Cart"/>
+        <JFXButton fx:id="btnRemoveFromCart" layoutX="642.0" layoutY="185.0" onAction="#btnRemoveFromCartOnAction" prefHeight="21.0" prefWidth="150.0" style="-fx-background-color: ECB365;" text="Remove From Cart" />
     </children>
 </AnchorPane>

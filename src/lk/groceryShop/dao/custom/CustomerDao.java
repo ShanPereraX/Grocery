@@ -2,7 +2,10 @@ package lk.groceryShop.dao.custom;
 
 import lk.groceryShop.dao.CrudDao;
 import lk.groceryShop.entity.Customer;
+import org.hibernate.Session;
 
-public interface CustomerDao extends CrudDao<Customer,String> {
+import java.util.List;
 
+public interface CustomerDao extends CrudDao<Customer, String> {
+    List<Customer> loadAllCustomers();
 }

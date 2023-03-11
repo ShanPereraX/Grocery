@@ -2,24 +2,24 @@ package lk.groceryShop.dao.custom.impl;
 
 import lk.groceryShop.dao.custom.CustomerDao;
 import lk.groceryShop.entity.Customer;
+import lk.groceryShop.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class CustomerDaoImpl implements CustomerDao {
-    Session session;
 
-    public CustomerDaoImpl(Session session) {
-        this.session = session;
-    }
 
     @Override
-    public boolean save(Customer entity) {
+    public boolean save(Customer entity, Session session) {
         Transaction transaction = session.getTransaction();
 
         System.out.println(entity);
         try {
             transaction.begin();
-            session.save(entity);
+      session.save(entity);
             transaction.commit();
             return true;
         } catch (RuntimeException e) {
@@ -30,12 +30,12 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public Customer view(String id) {
+    public Customer view(String id,Session session) {
         return session.get(Customer.class, id);
     }
 
     @Override
-    public boolean delete(String entity) {
+    public boolean delete(String entity,Session session) {
         Transaction transaction = session.beginTransaction();
         try {
             session.delete(new Customer(entity));
@@ -48,7 +48,7 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public boolean update(Customer entity) {
+    public boolean update(Customer entity,Session session) {
         Transaction transaction = session.beginTransaction();
         try {
             session.update(entity);
@@ -58,5 +58,14 @@ public class CustomerDaoImpl implements CustomerDao {
             transaction.rollback();
             return false;
         }
+    }
+
+    @Override
+    public List<Customer> loadAllCustomers() {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        String sql = "From Customer";
+        Query query = session.createQuery(sql);
+        List<Customer> list = query.list();
+        return list;
     }
 }

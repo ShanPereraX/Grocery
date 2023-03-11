@@ -1,0 +1,54 @@
+
+
+INSERT INTO Customer VALUES('C001','Panadura','Danapala','2022-2-6',40000);
+INSERT INTO Customer VALUES25('C002','Wadduwa','Gunapala','2022-8-12',40000);
+INSERT INTO Customer VALUES('C003','Matugama','Amarapala','120221-2',34000);
+INSERT INTO Customer VALUES('C004','Galle','Somapala','2022-1-2',67000);
+INSERT INTO Customer VALUES('C005','Aluthgama','Jinapala','2022-1-8',32000);
+INSERT INTO Customer VALUES('C006','Panadura','Gnanawathee','2022-1-3',78000);
+INSERT INTO Customer VALUES('C007','Ambalangoda','Amarawathee', '2022-5-7', 98000);
+INSERT INTO Customer VALUES('C008','Madampe','Leelawathee','2022-4-8',57000);
+INSERT INTO Customer VALUES('C009','Gunawathee','Kurunegala','2022-3-9',76000);
+INSERT INTO Customer VALUES('C010','Dehiwala','Dayapala','2022-4-9',40000);
+INSERT INTO Customer VALUES('C011','Negambo','Sangapala','2022-5-9',76000);
+INSERT INTO Customer VALUES('C012','Maharagama','Ariyawathee','2022-8-9',59000);
+INSERT INTO Customer VALUES('C013','Kalutara','Somawathee','2022-5-3',67000);
+INSERT INTO Customer VALUES('C014','Walapane','Somapala','2022-8-9',38000);
+INSERT INTO Customer VALUES('C015','Thrincomalee','Ariyapala','2022-8-9',76000);
+INSERT INTO Customer VALUES('C016','Nugegoda','Siriyalatha','2022-2-5',40000);
+INSERT INTO Customer VALUES('C017','Thrincomalee','Premalatha','2022-1-31',76000);
+INSERT INTO Customer VALUES('C018','Colombo','Chandralatha','2022-12-31',58000);
+INSERT INTO Customer VALUES('C019','Galle','Karunawathee','2022-1-23',97000);
+INSERT INTO Customer VALUES('C020','Keselwatta','Arunachalam','2022-3-4',58000);
+
+
+INSERT INTO Item VALUES('P001','Keerisamba Retail',3000,105.00);
+INSERT INTO Item VALUES('P002','Keerisamba 5Kg ',200,525.00);
+INSERT INTO Item VALUES('P003','Keerisamba 10Kg',36,995.00);
+INSERT INTO Item VALUES('P004','Keerisamba 50Kg',36,4100.00);
+INSERT INTO Item VALUES('P005','Red Raw Rice',6000,60.00);
+INSERT INTO Item VALUES('P006','Red Raw Rice 10Kg Pack',300,560.00);
+INSERT INTO Item VALUES('P007','Red Raw Rice 50Kg Pack',80,5230.00);
+INSERT INTO Item VALUES('P008','White Raw Rice 5Kg Pack',130,275.00);
+INSERT INTO Item VALUES('P009','White Raw Rice 50Kg Pack',13,2600.00);
+INSERT INTO Item VALUES('P010','Wattana Dhal 500g',83,,90.00);
+INSERT INTO Item VALUES('P011','Wattana Dhal 1Kg',40,170.00);
+INSERT INTO Item VALUES('P012','Mysoor Dhal 500g',89,90.00);
+INSERT INTO Item VALUES('P013','Mysoor Dhal 1Kg',59,180.00);
+INSERT INTO Item VALUES('P014','Orient Green Gram 500g',39,118.00);
+INSERT INTO Item VALUES('P015','Orient Green Gram 1Kg',12,220.00);
+INSERT INTO Item VALUES('P016','Anchor F/C Milk powder 450g',93,220.00);
+INSERT INTO Item VALUES('P017','Anchor F/C Milk powder 1Kg',40,580.00);
+INSERT INTO Item VALUES('P018','Anchor N/F Milk powder 1Kg',33,560.00);
+INSERT INTO Item VALUES('P019','Milo Packet 400g',33,240.00);
+INSERT INTO Item VALUES('P020','Lipton Ceylon Tea 100g',40,107.00);
+INSERT INTO Item VALUES('P021','Lipton Ceylon Tea 200g',40,198.00);
+INSERT INTO Item VALUES('P022','Lipton Ceylon Tea 400g',20,360.00);
+INSERT INTO Item VALUES('P023','White Suger 500g',45,55.00);
+INSERT INTO Item VALUES('P024','White Suger 1Kg',25,109.00);
+INSERT INTO Item VALUES('P025','Astra Margarine 250g',25,129.00);
+INSERT INTO Item VALUES('P026','Astra Margarine 500g',15,229.00);
+INSERT INTO Item VALUES('P027','Rice Noodle 200g',25,65.00);
+INSERT INTO Item VALUES('P028','Rice Noodle 500g',35,140.00);
+INSERT INTO Item VALUES('P029','Red Rice Noodle 500g',35,150.00);
+INSERT INTO Item VALUES('P030','Coka Cola 1.5L',30,160.00);

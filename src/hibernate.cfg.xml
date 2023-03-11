@@ -11,7 +11,7 @@
         <property name="hibernate.connection.password">#Shan0503</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <!--     mapping class="com.mcnz.jpa.examples.Player" / -->
     </session-factory>
 </hibernate-configuration>

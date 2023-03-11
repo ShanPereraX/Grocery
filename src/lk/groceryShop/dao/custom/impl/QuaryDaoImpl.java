@@ -8,9 +8,5 @@ import org.hibernate.Session;
 @NoArgsConstructor
 
 public class QuaryDaoImpl implements QuaryDao {
-    Session session;
 
-    public QuaryDaoImpl(Session session) {
-        this.session = session;
-    }
 }
