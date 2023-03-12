@@ -15,7 +15,6 @@ public class OrderDaoImpl implements OrderDao {
             transaction.commit();
             System.out.println("Order saved");
             return true;
-
         }catch (Exception e){
             transaction.rollback();
            return false;

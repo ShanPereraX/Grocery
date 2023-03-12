@@ -2,8 +2,10 @@ package lk.groceryShop.service.util;
 
 import lk.groceryShop.dto.CustomerDto;
 import lk.groceryShop.dto.ItemDto;
+import lk.groceryShop.dto.OrderDto;
 import lk.groceryShop.entity.Customer;
 import lk.groceryShop.entity.Item;
+import lk.groceryShop.entity.Orders;
 
 public class Converter {
     private static Converter converter;
@@ -29,5 +31,12 @@ public class Converter {
 
     public CustomerDto toCustomerDto(Customer entity) {
         return  new CustomerDto(entity.getId(), entity.getName(), entity.getAddress(), entity.getRegisteredDate(), entity.getSalary());
+    }
+
+    public Orders toOrderEntity(OrderDto dto) {
+        Orders orders = new Orders();
+        orders.setCustomer(dto.getCustomer());
+        orders.setItemList(dto.getItemList());
+        return orders;
     }
 }

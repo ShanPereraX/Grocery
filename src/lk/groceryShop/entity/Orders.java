@@ -16,13 +16,16 @@ import java.util.List;
 @Setter
 public class Orders implements SuperEntity {
     @Id
-    private String orderId;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int orderId;
     @CreationTimestamp
     private Date date;
     @ManyToOne(cascade = CascadeType.ALL)
     @ToString.Exclude
-    private Customer customer;
+    private Customer customer = new Customer();
 
     @ManyToMany(targetEntity = Item.class)
     List <Item> itemList = new ArrayList<>();
+
+
 }

@@ -8,15 +8,25 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import lk.groceryShop.dto.CustomerDto;
 import lk.groceryShop.dto.ItemDto;
+import lk.groceryShop.dto.OrderDto;
+import lk.groceryShop.entity.Customer;
+import lk.groceryShop.entity.Item;
+import lk.groceryShop.entity.Orders;
 import lk.groceryShop.service.ServiceFactory;
 import lk.groceryShop.service.custom.CustomerService;
 import lk.groceryShop.service.custom.ItemService;
 import lk.groceryShop.service.custom.OrderService;
 import lk.groceryShop.service.util.ServiceType;
 import lk.groceryShop.to.ItemTO;
+import lk.groceryShop.util.Navigation;
+import lk.groceryShop.util.NavigationType;
+import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -27,7 +37,8 @@ import java.util.regex.Pattern;
 public class PlaceOrderFormController implements Initializable {
 
     public Label txtDate;
-    public TableColumn colTotalPrice;
+    public TableColumn<ItemTO, Double> colTotalPrice;
+    public AnchorPane pane;
     @FXML
     private ComboBox<String> cmbCustomerID;
 
@@ -131,7 +142,6 @@ public class PlaceOrderFormController implements Initializable {
         lblTotal.setText(String.valueOf(total));
     }
 
-
     private boolean checkQuntity() {
         return Integer.parseInt(txtQty.getText()) > 0;
     }
@@ -140,33 +150,47 @@ public class PlaceOrderFormController implements Initializable {
         if (Pattern.compile("^[0-9]*[1-9][0-9]*$").matcher(txtQty.getText()).matches()) {
             return true;
         }
-        new Alert(Alert.AlertType.ERROR, "enter quatity").show();
+        new Alert(Alert.AlertType.ERROR, "enter quantity").show();
         return false;
     }
 
-    void setCart(ItemDto itemDto) {
 
+    @FXML
+    void btnClearOnAction(ActionEvent event) throws IOException {
+        Navigation.navigate(pane, NavigationType.ORDER);
     }
 
     @FXML
-    void btnClearOnAction(ActionEvent event) {
+    void btnPlaceOrderOnAction(ActionEvent event) throws IOException {
+        OrderDto order = new OrderDto();
+        Customer customer = new Customer();
+        customer.setName(txtCustomerName.getText());
+        customer.setId(cmbCustomerID.getSelectionModel().getSelectedItem());
+        order.setCustomer(customer);
 
-    }
+        ObservableList<ItemTO> items = tblCart.getItems();
 
-    @FXML
-    void btnPlaceOrderOnAction(ActionEvent event) {
+        for (ItemTO ele : items) {
+            order.getItemList().add(new Item(ele.getItemId(), ele.getDescription(), ele.getUnitPrice(), ele.getQtyOnHand()));
+        }
+
+        orderService.save(order);
+        new Alert(Alert.AlertType.INFORMATION,"Order Added!").show();
+        Navigation.navigate(pane,NavigationType.ORDER);
 
     }
 
     @FXML
     void btnRemoveFromCartOnAction(ActionEvent event) {
-
+        if (tblCart.getSelectionModel().getSelectedItem() != null) {
+            ObservableList<ItemTO> toList = tblCart.getItems();
+            toList.remove(tblCart.getSelectionModel().getSelectedItem());
+            tblCart.setItems(toList);
+            setTotal(toList);
+        }
+        btnRemoveFromCart.setDisable(true);
     }
 
-    @FXML
-    void tblCartOnAction(SortEvent<TableView<?>> event) {
-
-    }
 
     /**
      * Called to initialize a controller after its root element has been
@@ -182,7 +206,7 @@ public class PlaceOrderFormController implements Initializable {
         txtDate.setText(String.valueOf(Date.valueOf(LocalDate.now())));
         customerService = ServiceFactory.getInstance().getService(ServiceType.CUSTOMER);
         itemService = ServiceFactory.getInstance().getService(ServiceType.ITEM);
-
+        orderService = ServiceFactory.getInstance().getService(ServiceType.ORDER);
         colId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
@@ -192,6 +216,7 @@ public class PlaceOrderFormController implements Initializable {
         setCustomerIdList();
         setItemIdList();
 
+        btnRemoveFromCart.setDisable(true);
     }
 
     private void setItemIdList() {
@@ -229,5 +254,11 @@ public class PlaceOrderFormController implements Initializable {
         txtDescription.setText(view.getDescription());
         txtQtyOnHand.setText(String.valueOf(view.getQtyOnHand()));
         txtUnitPrice.setText(String.valueOf(view.getUnitPrice()));
+    }
+
+    public void tblCartOnMouseClicked(MouseEvent mouseEvent) {
+        if (tblCart.getSelectionModel().getSelectedItem() != null) {
+            btnRemoveFromCart.setDisable(false);
+        }
     }
 }

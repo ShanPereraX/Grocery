@@ -1,8 +1,13 @@
 package lk.groceryShop.dto;
 
+import lk.groceryShop.entity.Customer;
+import lk.groceryShop.entity.Item;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,7 +16,7 @@ import java.sql.Date;
 public class OrderDto implements SuperDto{
     private String orderId;
     private Date date;
-    private String customerId;
-
+    private Customer customer;
+    private List<Item> itemList = new ArrayList<>();
 
 }
