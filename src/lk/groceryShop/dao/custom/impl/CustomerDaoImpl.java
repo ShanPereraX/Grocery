@@ -26,14 +26,18 @@ public class CustomerDaoImpl implements CustomerDao {
             e.printStackTrace();
             transaction.rollback();
             return false;
-        }finally {
+        } finally {
             session.close();
         }
     }
 
     @Override
     public Customer view(String id, Session session) {
-        return session.get(Customer.class, id);
+        try {
+            return session.get(Customer.class, id);
+        } finally {
+            session.close();
+        }
     }
 
     @Override
@@ -46,7 +50,7 @@ public class CustomerDaoImpl implements CustomerDao {
         } catch (RuntimeException e) {
             transaction.rollback();
             return false;
-        }finally {
+        } finally {
             session.close();
         }
     }
@@ -61,7 +65,7 @@ public class CustomerDaoImpl implements CustomerDao {
         } catch (RuntimeException e) {
             transaction.rollback();
             return false;
-        }finally {
+        } finally {
             session.close();
         }
     }

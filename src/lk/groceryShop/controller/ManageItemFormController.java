@@ -13,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import lk.groceryShop.dto.CustomerDto;
 import lk.groceryShop.dto.ItemDto;
 import lk.groceryShop.service.ServiceFactory;
 import lk.groceryShop.service.custom.ItemService;
@@ -76,6 +75,7 @@ public class ManageItemFormController implements Initializable {
             boolean save = itemService.save(new ItemDto(txtId.getText(), txtDescription.getText(), Double.parseDouble(txtUnitPrice.getText()), Integer.parseInt(txtQtyOnHand.getText())));
             new Alert(Alert.AlertType.INFORMATION, save ? "Added" : "error").showAndWait();
             clearAll();
+            refreshTable();
         } else new Alert(Alert.AlertType.ERROR, "Error: Invalid Data Entry!").show();
     }
 
@@ -88,27 +88,18 @@ public class ManageItemFormController implements Initializable {
 
     private boolean validateAll() { //regex
         System.out.println("Validate");
-        if (Pattern.compile("^[a-zA-Z][0-9]{3,}$").matcher(txtId.getText()).matches()) {
-            System.out.println("id");
-            if (Pattern.compile("^[a-zA-Z0-9_\\-.,'&() ]{1,50}$").matcher(txtDescription.getText()).matches()) {
-                System.out.println("Des");
-                if (Pattern.compile("^\\d+$").matcher(txtQtyOnHand.getText()).matches()) {
-                    System.out.println("qty");
-                    if (Pattern.compile("^[0-9]+\\.?[0-9]*$").matcher(txtUnitPrice.getText()).matches()) {
-                        System.out.println("unit");
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return (
+                Pattern.compile("^[a-zA-Z][0-9]{3,}$").matcher(txtId.getText()).matches()
+                        && Pattern.compile("^[a-zA-Z0-9_\\-.,'&() ]{1,50}$").matcher(txtDescription.getText()).matches()
+                        && Pattern.compile("^\\d+$").matcher(txtQtyOnHand.getText()).matches()
+                        && Pattern.compile("^[0-9]+\\.?[0-9]*$").matcher(txtUnitPrice.getText()).matches());
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
         if (tblItem.getSelectionModel().getSelectedItem() != null) {
             itemService.delete(tblItem.getSelectionModel().getSelectedItem().getItemId());
-            new Alert(Alert.AlertType.INFORMATION, "Item successfully Deleted").showAndWait();
+            new Alert(Alert.AlertType.INFORMATION, "Item successfully Deleted").show();
             refreshTable();
             clearAll();
         }

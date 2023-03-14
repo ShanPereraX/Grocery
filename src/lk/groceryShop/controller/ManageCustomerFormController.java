@@ -17,6 +17,7 @@ import lk.groceryShop.dto.CustomerDto;
 import lk.groceryShop.service.ServiceFactory;
 import lk.groceryShop.service.custom.CustomerService;
 import lk.groceryShop.service.util.ServiceType;
+import lk.groceryShop.util.FactoryConfiguration;
 
 import java.net.URL;
 import java.sql.Date;
@@ -34,6 +35,7 @@ public class ManageCustomerFormController implements Initializable {
     public TableColumn colName;
     public TableColumn colSalary;
     public TableColumn colAddress;
+    public TextField txtSearchId;
     @FXML
     private TableView<CustomerDto> tblCustomers;
 
@@ -162,7 +164,21 @@ public class ManageCustomerFormController implements Initializable {
     }
 
     public void searchIdOnAction(ActionEvent actionEvent) {
-
+        if(Pattern.compile("^[a-zA-Z][0-9]{3,}$").matcher(txtSearchId.getText()).matches()){
+           try{
+               CustomerDto selectedCustomer = customerService.view(txtSearchId.getText());
+               if (selectedCustomer != null) {
+                   txtId.setText(selectedCustomer.getId());
+                   txtName.setText(selectedCustomer.getName());
+                   txtAddress.setText(selectedCustomer.getAddress());
+                   txtSalary.setText(String.valueOf(selectedCustomer.getSalary()));
+               }
+           }catch(RuntimeException e){
+                new Alert(Alert.AlertType.INFORMATION,e.getMessage()).show();
+           }
+        }else{
+            new Alert(Alert.AlertType.ERROR,"Invalid data entry").show();
+        }
     }
 
     public void txtSalaryOnMouseClicked(MouseEvent mouseEvent) {
