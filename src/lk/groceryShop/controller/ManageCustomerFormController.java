@@ -63,16 +63,11 @@ public class ManageCustomerFormController implements Initializable {
     @FXML
     void btnAddOnAction(ActionEvent event) {
         if (validateAll()) {
-            boolean save = customerService.save(new CustomerDto(
-                    txtId.getText(),
-                    txtName.getText(),
-                    txtAddress.getText(),
-                    Date.valueOf(LocalDate.now()),
-                    Double.parseDouble(txtSalary.getText())));
+            boolean save = customerService.save(new CustomerDto(txtId.getText(), txtName.getText(), txtAddress.getText(), Date.valueOf(LocalDate.now()), Double.parseDouble(txtSalary.getText())));
             new Alert(Alert.AlertType.INFORMATION, save ? "Added" : "Error").show();
             refreshTable();
             clearAll();
-        }else new Alert(Alert.AlertType.ERROR,"Error: Invalid Data Entry!").show();
+        } else new Alert(Alert.AlertType.ERROR, "Error: Invalid Data Entry!").show();
     }
 
     private void clearAll() {
@@ -83,40 +78,34 @@ public class ManageCustomerFormController implements Initializable {
     }
 
     private boolean validateAll() {
-        if (Pattern.compile("^[a-zA-Z][0-9]{3,}$").matcher(txtId.getText()).matches()) {
-            System.out.println("id");
-            if (Pattern.compile("^[a-zA-Z]{3,}$").matcher(txtName.getText()).matches()) {
-                System.out.println("name");
-                if (Pattern.compile("^[a-zA-Z]{3,}$").matcher(txtAddress.getText()).matches()) {
-                    System.out.println("address");
-                    return  Pattern.compile("^[0-9]+\\.?[0-9]*$").matcher(txtSalary.getText()).matches();
-                }
-            }
-        }
-        return false;
+        return
+                Pattern.compile("^[a-zA-Z][0-9]{3,}$").matcher(txtId.getText()).matches() &&
+                        Pattern.compile("^[a-zA-Z]{3,}$").matcher(txtName.getText()).matches() &&
+                        Pattern.compile("^[a-zA-Z]{3,}$").matcher(txtAddress.getText()).matches() &&
+                        Pattern.compile("^[0-9]+\\.?[0-9]*$").matcher(txtSalary.getText()).matches();
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        if(tblCustomers.getSelectionModel().getSelectedItem() != null){
+        if (tblCustomers.getSelectionModel().getSelectedItem() != null) {
             customerService.delete(tblCustomers.getSelectionModel().getSelectedItem().getId());
-            new Alert(Alert.AlertType.INFORMATION,"Customer successfully Deleted").show();
+            new Alert(Alert.AlertType.INFORMATION, "Customer successfully Deleted").show();
             refreshTable();
             clearAll();
         }
     }
 
-    private void refreshTable(){
-      try{
-          List<CustomerDto> customerDtos = customerService.loadCustomers();
-          ObservableList<CustomerDto> list = FXCollections.observableArrayList();
-          list.addAll(customerDtos);
-          tblCustomers.setItems(list);
-          btnDelete.setDisable(true);
-          btnUpdate.setDisable(true);
-      }catch (RuntimeException e){
-          new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-      }
+    private void refreshTable() {
+        try {
+            List<CustomerDto> customerDtos = customerService.loadCustomers();
+            ObservableList<CustomerDto> list = FXCollections.observableArrayList();
+            list.addAll(customerDtos);
+            tblCustomers.setItems(list);
+            btnDelete.setDisable(true);
+            btnUpdate.setDisable(true);
+        } catch (RuntimeException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     @FXML
@@ -144,16 +133,17 @@ public class ManageCustomerFormController implements Initializable {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+
         setCustomerId();
     }
 
     private void setCustomerId() {
-          refreshTable();
+        refreshTable();
     }
 
     public void tblCustomersOnMouseClicked(MouseEvent mouseEvent) {
         CustomerDto selectedCustomer = tblCustomers.getSelectionModel().getSelectedItem();
-        if(selectedCustomer!=null){
+        if (selectedCustomer != null) {
 
             btnDelete.setDisable(false);
             btnUpdate.setDisable(false);
@@ -167,6 +157,7 @@ public class ManageCustomerFormController implements Initializable {
     }
 
     public void searchIdOnAction(ActionEvent actionEvent) {
+
     }
 
     public void txtSalaryOnMouseClicked(MouseEvent mouseEvent) {

@@ -24,8 +24,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public boolean save(ItemDto dto) {
-       // return itemDao.save(converter.toItemEntity(dto));
-    return false;
+        return itemDao.save(converter.toItemEntity(dto), FactoryConfiguration.getInstance().getSession());
     }
 
     @Override
@@ -36,21 +35,20 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public boolean delete(String id) {
-        return itemDao.delete(id,FactoryConfiguration.getInstance().getSession());
+        return itemDao.delete(id, FactoryConfiguration.getInstance().getSession());
     }
 
     @Override
     public boolean update(ItemDto dto) {
-        return itemDao.update(converter.toItemEntity(dto),FactoryConfiguration.getInstance().getSession());
+        System.out.print("Update: ");
+        return itemDao.update(converter.toItemEntity(dto), FactoryConfiguration.getInstance().getSession());
     }
 
     @Override
     public List<ItemDto> loadItemList() throws RuntimeException {
         List<Item> itemList = itemDao.loadItemList();
         List<ItemDto> collect = itemList.stream().map(converter::toItemDto).collect(Collectors.toList());
-        if(collect.size()!=0){
-            return collect;
-        }
+        if (collect.size() != 0) return collect;
         throw new RuntimeException("Empty Item list!");
     }
 }

@@ -19,23 +19,25 @@ public class CustomerDaoImpl implements CustomerDao {
         System.out.println(entity);
         try {
             transaction.begin();
-      session.save(entity);
+            session.save(entity);
             transaction.commit();
             return true;
         } catch (RuntimeException e) {
-           e.printStackTrace();
+            e.printStackTrace();
             transaction.rollback();
             return false;
+        }finally {
+            session.close();
         }
     }
 
     @Override
-    public Customer view(String id,Session session) {
+    public Customer view(String id, Session session) {
         return session.get(Customer.class, id);
     }
 
     @Override
-    public boolean delete(String entity,Session session) {
+    public boolean delete(String entity, Session session) {
         Transaction transaction = session.beginTransaction();
         try {
             session.delete(new Customer(entity));
@@ -44,11 +46,13 @@ public class CustomerDaoImpl implements CustomerDao {
         } catch (RuntimeException e) {
             transaction.rollback();
             return false;
+        }finally {
+            session.close();
         }
     }
 
     @Override
-    public boolean update(Customer entity,Session session) {
+    public boolean update(Customer entity, Session session) {
         Transaction transaction = session.beginTransaction();
         try {
             session.update(entity);
@@ -57,6 +61,8 @@ public class CustomerDaoImpl implements CustomerDao {
         } catch (RuntimeException e) {
             transaction.rollback();
             return false;
+        }finally {
+            session.close();
         }
     }
 
@@ -66,6 +72,7 @@ public class CustomerDaoImpl implements CustomerDao {
         String sql = "From Customer";
         Query query = session.createQuery(sql);
         List<Customer> list = query.list();
+        session.close();
         return list;
     }
 }

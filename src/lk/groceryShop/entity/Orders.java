@@ -25,6 +25,12 @@ public class Orders implements SuperEntity {
     private Customer customer = new Customer();
 
     @ManyToMany(targetEntity = Item.class)
+            @JoinTable(
+                    joinColumns = {
+                            @JoinColumn(name = "orderId")},
+                    inverseJoinColumns = {
+                            @JoinColumn(name = "itemId")})
+       //     @Column(name="item_qty")
     List <Item> itemList = new ArrayList<>();
 
 

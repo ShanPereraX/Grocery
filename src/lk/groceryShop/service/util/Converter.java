@@ -22,6 +22,7 @@ public class Converter {
     }
 
     public Item toItemEntity(ItemDto dto) {
+        System.out.println("to item entity");
         return new Item(dto.getItemId(), dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand());
     }
 

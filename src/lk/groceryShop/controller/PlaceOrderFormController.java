@@ -103,7 +103,7 @@ public class PlaceOrderFormController implements Initializable {
             to.setQtyOnHand(Integer.parseInt(txtQty.getText()));
             to.setUnitPrice(Double.parseDouble(txtUnitPrice.getText()));
             to.setTotal(Double.parseDouble(txtQty.getText()) * Double.parseDouble(txtUnitPrice.getText()));
-            System.out.println(to.getTotal());
+//            System.out.println(to.getTotal());
 
             addItemToCart(to);
         }
@@ -170,13 +170,12 @@ public class PlaceOrderFormController implements Initializable {
 
         ObservableList<ItemTO> items = tblCart.getItems();
 
-        for (ItemTO ele : items) {
-            order.getItemList().add(new Item(ele.getItemId(), ele.getDescription(), ele.getUnitPrice(), ele.getQtyOnHand()));
-        }
+        for (ItemTO ele : items) order.getItemList().add(new Item(ele.getItemId(), ele.getDescription(), ele.getUnitPrice(), ele.getQtyOnHand()));
+
 
         orderService.save(order);
-        new Alert(Alert.AlertType.INFORMATION,"Order Added!").show();
-        Navigation.navigate(pane,NavigationType.ORDER);
+        new Alert(Alert.AlertType.INFORMATION, "Order Added!").show();
+        Navigation.navigate(pane, NavigationType.ORDER);
 
     }
 
@@ -207,6 +206,7 @@ public class PlaceOrderFormController implements Initializable {
         customerService = ServiceFactory.getInstance().getService(ServiceType.CUSTOMER);
         itemService = ServiceFactory.getInstance().getService(ServiceType.ITEM);
         orderService = ServiceFactory.getInstance().getService(ServiceType.ORDER);
+
         colId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));

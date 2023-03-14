@@ -18,7 +18,8 @@ public class OrderDaoImpl implements OrderDao {
         }catch (Exception e){
             transaction.rollback();
            return false;
-
+        }finally {
+            session.close();
         }
     }
 

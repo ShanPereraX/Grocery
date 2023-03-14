@@ -16,14 +16,17 @@ public class ItemDaoImpl implements ItemDao {
     public boolean save(Item entity, Session session) {
         Transaction transaction = session.beginTransaction();
         try {
-            transaction.begin();
-            Integer integer = (Integer) session.save(entity);
+            session.save(entity);
             transaction.commit();
             System.out.println("item saved");
             return true;
         } catch (RuntimeException e) {
             transaction.rollback();
+            System.out.println(e.getMessage());
+            System.out.println("item not saved");
             return false;
+        } finally {
+            session.close();
         }
     }
 
@@ -42,6 +45,8 @@ public class ItemDaoImpl implements ItemDao {
         } catch (RuntimeException e) {
             transaction.rollback();
             return false;
+        } finally {
+            session.close();
         }
     }
 
@@ -55,6 +60,8 @@ public class ItemDaoImpl implements ItemDao {
         } catch (RuntimeException e) {
             transaction.rollback();
             return false;
+        } finally {
+            session.close();
         }
     }
 
@@ -64,6 +71,7 @@ public class ItemDaoImpl implements ItemDao {
         String sql = "From Item";
         Query query = session.createQuery(sql);
         List<Item> list = query.list();
+        session.close();
         return list;
     }
 }
