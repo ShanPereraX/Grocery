@@ -78,11 +78,7 @@ public class ManageCustomerFormController implements Initializable {
     }
 
     private boolean validateAll() {
-        return
-                Pattern.compile("^[a-zA-Z][0-9]{3,}$").matcher(txtId.getText()).matches() &&
-                        Pattern.compile("^[a-zA-Z]{3,}$").matcher(txtName.getText()).matches() &&
-                        Pattern.compile("^[a-zA-Z]{3,}$").matcher(txtAddress.getText()).matches() &&
-                        Pattern.compile("^[0-9]+\\.?[0-9]*$").matcher(txtSalary.getText()).matches();
+        return Pattern.compile("^[a-zA-Z][0-9]{3,}$").matcher(txtId.getText()).matches() && Pattern.compile("^[a-zA-Z]{3,}$").matcher(txtName.getText()).matches() && Pattern.compile("^[a-zA-Z]{3,}$").matcher(txtAddress.getText()).matches() && Pattern.compile("^[0-9]+\\.?[0-9]*$").matcher(txtSalary.getText()).matches();
     }
 
     @FXML
@@ -110,6 +106,15 @@ public class ManageCustomerFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+        if (validateAll()) {
+            boolean save = customerService.update(new CustomerDto(txtId.getText(), txtName.getText(), txtAddress.getText(), Date.valueOf(LocalDate.now()), Double.parseDouble(txtSalary.getText())));
+            new Alert(Alert.AlertType.INFORMATION, save ? "Updated" : "Error").show();
+            refreshTable();
+
+            btnUpdate.setDisable(true);
+            btnDelete.setDisable(true);
+            clearAll();
+        } else new Alert(Alert.AlertType.ERROR, "Error: Invalid Data Entry!").show();
 
     }
 
@@ -143,8 +148,8 @@ public class ManageCustomerFormController implements Initializable {
 
     public void tblCustomersOnMouseClicked(MouseEvent mouseEvent) {
         CustomerDto selectedCustomer = tblCustomers.getSelectionModel().getSelectedItem();
-        if (selectedCustomer != null) {
 
+        if (selectedCustomer != null) {
             btnDelete.setDisable(false);
             btnUpdate.setDisable(false);
 

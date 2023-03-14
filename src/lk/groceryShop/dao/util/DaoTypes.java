@@ -5,5 +5,5 @@ public enum DaoTypes {
     ITEM,
     ORDER,
     ORDER_DETAIL,
-    QUARY
+    QUERY
 }

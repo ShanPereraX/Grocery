@@ -2,8 +2,6 @@ package lk.groceryShop.dao;
 
 import lk.groceryShop.dao.custom.impl.*;
 import lk.groceryShop.dao.util.DaoTypes;
-import lk.groceryShop.util.FactoryConfiguration;
-import org.hibernate.Session;
 
 public class DaoFactory {
     private static DaoFactory daoFactory;
@@ -22,7 +20,7 @@ public class DaoFactory {
                 return (T) new CustomerDaoImpl();
             case ORDER:
                 return (T) new OrderDaoImpl();
-            case QUARY:
+            case QUERY:
                 return (T) new QuaryDaoImpl();
         }
         return null;
